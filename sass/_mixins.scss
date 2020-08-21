@@ -1,0 +1,73 @@
+@mixin bandeauFixeBas () {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+@mixin flex ($disposition:row, $justify:center, $alignement:center) {
+    display: flex;
+    flex-direction: $disposition;
+    justify-content: $justify;
+    align-items: $alignement;
+}
+
+@mixin dimensions ($largeur:100%, $hauteur:100%) {
+    width: $largeur;
+    height: $hauteur;
+}
+
+@mixin marges ($int:0px, $ext:0px) {
+    padding: $int;
+    margin: $ext;
+}
+
+@mixin bordureArrondie ($size, $type, $couleur, $radius) {
+    border: $size $type $couleur;
+    border-radius: $radius;
+}
+
+@mixin animer ($animation, $duree, $delai, $iteration) {
+    display: inline;
+    animation: $animation $duree $delai $iteration;
+}
+
+@mixin souligner () {
+    width: auto;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+@mixin degraderCouleurs($degres, $coul1, $coul2){
+    background : -webkit-linear-gradient($degres, $coul1, $coul2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin style($police, $size, $color){
+    font-family: $police;
+    font-size : $size;
+    color : $color;
+}
+
+@mixin ordi{
+    @media screen and (max-width : map-get($breakpoints, ordi)){
+        @content;
+    }
+}
+@mixin petitOrdi{
+    @media screen and (max-width : map-get($breakpoints, petitOrdi)){
+        @content;
+    }
+}
+@mixin tablette{
+    @media screen and (max-width : map-get($breakpoints, tablette)){
+        @content;
+    }
+}
+@mixin mobile {
+    @media screen and (max-width : map-get($breakpoints, mobile)){
+        @content;
+    }
+}

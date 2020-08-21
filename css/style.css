@@ -1,0 +1,88 @@
+body {
+  background-color: #f3e9f1;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin: 0px 50px 0px 50px;
+  padding: 0px;
+}
+
+.logoOrinoco {
+  background-image: url("../images/logoOrinoco2.png");
+  background-repeat: no-repeat;
+  height: 120px;
+  width: 266px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+nav {
+  border: 1px solid #8f5bfe;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-around;
+  height: 30px;
+  width: 300px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: space-around;
+  margin: 0px 10px 0px 10px;
+}
+
+#panier :hover {
+  color: blue;
+  font-size: 1.1em;
+}
+
+#lienAccueil :hover {
+  font-style: italic;
+}
+
+section {
+  background-color: white;
+  margin: 0px;
+  padding: 50px;
+  width: auto;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+footer {
+  text-align: center;
+  margin: 50px;
+}
+footer p {
+  text-decoration: underline;
+  font-weight: bold;
+}
+footer a {
+  text-decoration: underline;
+  font-weight: normal;
+}
+footer li :hover {
+  color: blue;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,75 @@
+@import "./mixins";
+
+body{
+    background-color: rgb(243,233,241);
+    @include marges(0px, 0px);
+    width: 100%;
+}
+
+header{
+    @include flex (row, space-between, center);
+    text-align: center;
+    margin: 0px 50px 0px 50px;
+    padding:0px;
+}
+
+.logoOrinoco{
+    background-image: url("../images/logoOrinoco2.png");
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 266px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+nav {
+    @include bordureArrondie (1px, solid, 
+    rgb(143,91,254), 15px);
+    @include flex (column, center, space-around);
+    height:30px;
+    width: 300px;
+}
+
+ul{
+    list-style: none;
+    @include flex (row, space-around, space-around);
+    margin : 0px 10px 0px 10px;
+}
+
+#panier :hover{
+    color: blue;
+    font-size: 1.1em;
+}
+
+#lienAccueil :hover{
+    font-style: italic;
+}
+
+section{
+    background-color: white;
+    margin: 0px;
+    padding: 50px;
+    width: auto;
+    color: black;
+    @include flex(column, center, left);
+}
+
+footer{
+    text-align: center;
+    margin:50px;
+    & p{
+        text-decoration: underline;
+        font-weight: bold;
+    }
+    & a {
+        text-decoration: underline;
+        font-weight: normal;
+    }
+    & li :hover{
+        color : blue;
+        }
+}
