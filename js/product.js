@@ -1,6 +1,7 @@
 let url = new URL(window.location.href);
 let id = url.searchParams.get("id");
 let productSolo = document.getElementById("product-solo");
+let produit = "";
 
 function accesApi(type, url, envoi) {
     type = type.toUpperCase();
@@ -31,71 +32,115 @@ function accesApi(type, url, envoi) {
 let accesApiTeddies = accesApi("get", "http://localhost:3000/api/teddies/" + id, null);
 accesApiTeddies.then(
     function (result) {
-        productSolo.appendChild(nomProduit(result));
-        productSolo.appendChild(photoProduit(result));
-        productSolo.appendChild(resumeProduit(result));
-        productSolo.appendChild(prixProduit(result));
-        productSolo.appendChild(couleursProduit(result));
-        productSolo.appendChild(ajouterPanier());
+        produit = result;
+        creerFicheProduit();
+        ajouterAuPanier();
     }).catch(
         function (erreur) {
             console.log(erreur);
         });
+        
+function produitEnCours(){
+    localStorage.setItem("id", produit.id);
+    localStorage.setItem("name", produit.name);
+    localStorage.setItem("photo", produit.photo);
+    localStorage.setItem("couleur", produit.couleur);
+    localStorage.setItem("prix", produit.prix);
+}
 
-function nomProduit(product) {
+function ajouterAuPanier() {
+    selectionCouleur();
+    let bouton = document.getElementById("boutonPanier");
+    bouton.setAttribute("onclick", "window.location.href='../html/basket.html'");
+    bouton.addEventListener("click", function () {
+        produitEnCours();
+    });
+}
+
+function selectionCouleur(){
+    let select = document.getElementById("couleur");
+    select.addEventListener("click", function () {
+        produitEnCours.couleur = document.getElementById("couleur").value;
+    });
+}
+
+function creerFicheProduit() {
+    productSolo.appendChild(nomProduit());
+    productSolo.appendChild(photoProduit());
+    productSolo.appendChild(resumeProduit());
+    productSolo.appendChild(prixProduit());
+    productSolo.appendChild(choixCouleurs());
+    productSolo.appendChild(boutonPanier());
+}
+
+function nomProduit() {
     let boxName = document.createElement("h2");
     boxName.setAttribute("id", "titreProduit");
-    boxName.innerHTML = product.name;
+    boxName.innerHTML = produit.name;
     return boxName;
 }
 
-function photoProduit(product) {
+function photoProduit() {
     let boxPhoto = document.createElement("p");
-    boxPhoto.setAttribute("class", "images");
+    boxPhoto.setAttribute("id", "image");
     let photo = document.createElement("img");
-    photo.setAttribute("src", product.imageUrl);
+    photo.setAttribute("src", produit.imageUrl);
     photo.setAttribute("height", "400px");
     boxPhoto.appendChild(photo);
     return boxPhoto;
 }
 
-function resumeProduit(product) {
+function resumeProduit() {
     let resume = document.createElement("p");
-    resume.setAttribute("class", "resume");
-    resume.innerHTML = product.description;
+    resume.setAttribute("id", "resume");
+    resume.innerHTML = produit.description;
     return resume;
 }
 
-function prixProduit(product) {
+function prixProduit() {
     let price = document.createElement("p");
-    price.setAttribute("class", "prix");
-    price.innerHTML = product.price / 100 + "€";
+    price.setAttribute("id", "prix");
+    price.innerHTML = produit.price / 100 + "€";
     return price;
 }
 
-function couleursProduit(product) {
+function choixCouleurs() {
+    let choixCouleurs = document.createElement("div");
+    choixCouleurs.setAttribute("id", "choixCouleurs");
     let couleursDispo = document.createElement("p");
     couleursDispo.innerHTML = "Couleurs disponibles : ";
-    productSolo.appendChild(couleursDispo);
+    choixCouleurs.appendChild(couleursDispo);
+    choixCouleurs.appendChild(couleursProduit());
+    return choixCouleurs;
+}
 
+function couleursProduit() {
     let form = document.createElement("form");
     let select = document.createElement("select");
-    let optGroup = document.createElement("optgroup");
-    let couleurs = product.colors;
-    select.appendChild(optGroup);
+    select.setAttribute("id", "couleur");
+    let couleurs = produit.colors;
     for (let index = 0; index < couleurs.length; index++) {
         let option = document.createElement("option");
+        option.setAttribute("class", "options");
         option.innerHTML = couleurs[index];
         option.setAttribute("value", couleurs[index]);
-        option.setAttribute("name", couleurs[index]);
-        optGroup.appendChild(option);
+        if (index == 0) {
+            produitEnCours.couleur = couleurs[0];
+        }
+        select.appendChild(option);
     }
     form.appendChild(select);
     return form;
 }
 
-function ajouterPanier(){
-    let ajoutPanier = document.createElement("button");
-    ajoutPanier.innerHTML = "Ajouter au panier";
-    productSolo.appendChild(ajoutPanier);
+function boutonPanier() {
+    let boiteBouton = document.createElement("div");
+    boiteBouton.setAttribute("id", "bouton");
+    let boutonPanier = document.createElement("button");
+    boutonPanier.setAttribute("id", "boutonPanier");
+    boutonPanier.setAttribute("type", "button");
+    boutonPanier.innerHTML = "Ajouter au panier";
+    boiteBouton.appendChild(boutonPanier);
+    return boiteBouton;
 }
+

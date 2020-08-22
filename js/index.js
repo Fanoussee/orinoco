@@ -64,10 +64,10 @@ function nomProduit(product){
 
 function photoProduit(product){
     let boxPhoto = document.createElement("p");
-    boxPhoto.setAttribute("class", "images");
+    boxPhoto.setAttribute("class", "boiteImages");
     let photo = document.createElement("img");
     photo.setAttribute("src", product.imageUrl);
-    photo.setAttribute("height", "200px");
+    photo.setAttribute("class", "images");
     boxPhoto.appendChild(photo);
     return boxPhoto;
 }
@@ -81,6 +81,7 @@ function resumeProduit(product){
 
 function prixProduit(product){
     let price = document.createElement("p");
+    price.setAttribute("class", "prixProduits");
     price.innerHTML = product.price/100 + "€";
     return price;
 }

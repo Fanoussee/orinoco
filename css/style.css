@@ -16,7 +16,7 @@ header {
 }
 
 .logoOrinoco {
-  background-image: url("../images/logoOrinoco2.png");
+  background-image: url("../images/logoOrinoco.png");
   background-repeat: no-repeat;
   height: 120px;
   width: 266px;
@@ -34,9 +34,9 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: space-around;
-  height: 30px;
-  width: 300px;
+  align-items: stretch;
+  height: 40px;
+  width: 250px;
 }
 
 ul {
@@ -44,8 +44,14 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: space-around;
-  margin: 0px 10px 0px 10px;
+  align-items: center;
+  padding: 0px;
+  margin: 10px;
+}
+
+li {
+  padding: 0px;
+  margin: 0px;
 }
 
 #panier :hover {
@@ -62,67 +68,13 @@ section {
   padding: 50px;
   margin: 0px;
   width: auto;
-  color: black;
-}
-
-#list-Products {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: left;
-}
-
-.product {
-  border: 2px solid #8f5bfe;
-  border-radius: 10px;
-  padding: 5px;
-  margin: 5px;
-  font-weight: normal;
-}
-
-#product-solo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-}
-
-.images {
-  text-align: center;
-  padding: 10px;
-  margin: 10px;
-}
-
-#titreProduit {
-  font-size: 3em;
-  text-align: center;
-  font-weight: bold;
-}
-
-.nomProduit {
-  font-weight: bold;
-  font-size: 1.5em;
-  text-align: center;
-}
-
-.resumeProduits {
-  text-align: justify;
-  padding: 5px;
-  margin: 5px;
-}
-
-.resume, .prix {
-  text-align: center;
-}
-
-.prix {
-  font-weight: bold;
-  font-size: 1.6em;
+  height: auto;
 }
 
 footer {
   text-align: center;
-  margin: 50px;
+  padding: 0px;
+  margin: 30px;
 }
 footer p {
   text-decoration: underline;
@@ -136,6 +88,106 @@ footer a {
 }
 footer li :hover {
   color: blue;
+}
+
+#list-Products {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: left;
+  flex-wrap: wrap;
+}
+
+.product {
+  border: 2px solid #8f5bfe;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 20px;
+  font-weight: normal;
+  max-width: 300px;
+  color: black;
+}
+
+.boiteImages {
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+}
+
+.images {
+  padding: 5px;
+  margin: 5px;
+  height: 150px;
+}
+
+.nomProduit {
+  padding: 5px;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.resumeProduits {
+  text-align: justify;
+  padding: 5px;
+  margin: 5px;
+}
+
+.prixProduits {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: 5px;
+  margin: 5px;
+}
+
+#product-solo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+#titreProduit {
+  font-size: 3em;
+  text-align: center;
+  font-weight: bold;
+}
+
+#image,
+#resume,
+#prix {
+  text-align: center;
+}
+
+#prix {
+  font-weight: bold;
+  font-size: 1.6em;
+  text-align: right;
+}
+
+#choixCouleurs {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+}
+#choixCouleurs p {
+  padding: 10px;
+  margin: 0px;
+}
+
+#bouton {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  margin-top: 30px;
+}
+#bouton button {
+  padding: 10px;
+  margin: 0px;
 }
 
 /*# sourceMappingURL=style.css.map */

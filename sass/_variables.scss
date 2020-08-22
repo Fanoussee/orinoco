@@ -1,0 +1,22 @@
+$coul-fond : rgb(243, 233, 241);
+$coul-trait : rgb(143, 91, 254);
+
+$maxWidth : 300px;
+
+$breakpoints : (
+    ordi : 1650px,
+    petitOrdi : 1200px,
+    tablette : 850px,
+    mobile : 600px
+);
+
+$logoOrinoco : (
+    url : "../images/logoOrinoco.png",
+    height : 120px, 
+    width : 266px
+);
+
+$nav : (
+    height : 40px,
+    width : 250px
+);

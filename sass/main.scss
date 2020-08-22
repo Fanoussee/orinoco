@@ -1,7 +1,7 @@
 @import "./mixins";
-$coul-fond : rgb(243, 233, 241);
-$coul-trait : rgb(143, 91, 254);
+@import "./variables";
 
+//Mise en forme commune à toutes les pages
 body {
     background-color: $coul-fond;
     @include marges(0px, 0px);
@@ -16,10 +16,10 @@ header {
 }
 
 .logoOrinoco {
-    background-image: url("../images/logoOrinoco2.png");
+    background-image: url(map-get($logoOrinoco, url));
     background-repeat: no-repeat;
-    height: 120px;
-    width: 266px;
+    height: map-get($logoOrinoco, height);
+    width: map-get($logoOrinoco, width);
 }
 
 a {
@@ -31,15 +31,19 @@ a {
 nav {
     @include bordureArrondie (1px, solid,
         $coul-trait, 15px);
-    @include flex (column, center, space-around);
-    height: 30px;
-    width: 300px;
+    @include flex (column, center, stretch);
+    height: map-get($nav, height);
+    width: map-get($nav, width);
 }
 
 ul {
     list-style: none;
-    @include flex (row, space-around, space-around);
-    margin: 0px 10px 0px 10px;
+    @include flex (row, space-around, center);
+    @include marges(10px, 0px);
+}
+
+li {
+    @include marges(0px, 0px);
 }
 
 #panier :hover {
@@ -55,58 +59,12 @@ section {
     background-color: white;
     @include marges(0px, 50px);
     width: auto;
-    color: black;
-}
-
-#list-Products {
-    @include flex(row, center, left);
-}
-
-.product {
-    //ici la mise en forme de chaque produit dans la liste
-    @include bordureArrondie(2px, solid, $coul-trait, 10px);
-    @include marges(5px, 5px);
-    font-weight: normal;
-}
-
-#product-solo {
-    @include flex(column, center, left);
-}
-
-.images {
-    text-align: center;
-    @include marges(10px, 10px);
-}
-
-#titreProduit {
-    font-size: 3em;
-    text-align: center;
-    font-weight: bold;
-}
-
-.nomProduit {
-    font-weight: bold;
-    font-size: 1.5em;
-    text-align: center;
-}
-
-.resumeProduits{
-    text-align: justify;
-    @include marges(5px, 5px);
-}
-
-.resume, .prix{
-    text-align: center;
-}
-
-.prix{
-    font-weight: bold;
-    font-size : 1.6em;
+    height: auto;
 }
 
 footer {
     text-align: center;
-    margin: 50px;
+    @include marges(30px, 0px);
 
     & p {
         text-decoration: underline;
@@ -121,5 +79,86 @@ footer {
 
     & li :hover {
         color: blue;
+    }
+}
+
+//Mise en forme spécifique à la page d'accueil
+#list-Products {
+    @include flex(row, center, left);
+    flex-wrap: wrap;
+}
+
+.product {
+    @include bordureArrondie(2px, solid, $coul-trait, 10px);
+    @include marges(20px, 5px);
+    font-weight: normal;
+    max-width: $maxWidth;
+    color: black;
+}
+
+.boiteImages {
+    text-align: center;
+    @include marges(10px, 10px);
+}
+
+.images {
+    @include marges(5px, 5px);
+    height: $maxWidth / 2;
+}
+
+.nomProduit {
+    @include marges(5px, 5px);
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.resumeProduits {
+    text-align: justify;
+    @include marges(5px, 5px);
+}
+
+.prixProduits {
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.5em;
+    @include marges(5px, 5px);
+}
+
+//Mise en forme spécifique à la page produit
+#product-solo {
+    @include flex(column, center, left);
+}
+
+#titreProduit {
+    font-size: 3em;
+    text-align: center;
+    font-weight: bold;
+}
+
+#image,
+#resume,
+#prix {
+    text-align: center;
+}
+
+#prix {
+    font-weight: bold;
+    font-size: 1.6em;
+    text-align: right;
+}
+
+#choixCouleurs {
+    @include flex(row, right, center);
+    & p{
+        @include marges(0px, 10px);
+    }
+}
+
+#bouton {
+    @include flex(row, right, center);
+    margin-top: 30px;
+    & button{
+        @include marges(0px, 10px);
     }
 }
