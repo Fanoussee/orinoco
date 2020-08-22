@@ -7,7 +7,6 @@ function accesApi(type, url, envoi) {
         return new Promise(function (resolve, reject) {
             let request = new XMLHttpRequest();
             let statut = true;
-            let reponse = "";
             request.onreadystatechange = function () {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                     resolve(JSON.parse(this.response));
@@ -30,32 +29,58 @@ function accesApi(type, url, envoi) {
 let accesApiTeddies = accesApi("get", "http://localhost:3000/api/teddies", null);
 accesApiTeddies.then(
     function (result) {
-        console.log(result);
-        let teddies = document.createElement("div");
-        teddies.setAttribute("class", "produitEnListe");
-        listProducts.appendChild(teddies);
-
+        listProducts.appendChild(creerTeddies());
         for (let index = 0; index < result.length; index++) {
-            const element = result[index];
-            console.log(element);
-            let boxName = document.createElement("p");
-            boxName.innerHTML = element.name;
-            let boxPhoto = document.createElement("p");
-            let photo = document.createElement("img");
-            photo.setAttribute("src", element.imageUrl);
-            photo.setAttribute("height", "120px");
-            let resume = document.createElement("p");
-            resume.innerHTML = element.description;
-            let price = document.createElement("p");
-            price.innerHTML = element.price/100 + "€";
-
-            boxPhoto.appendChild(photo);
-            teddies.appendChild(boxPhoto);
-            teddies.appendChild(boxName);
-            teddies.appendChild(resume);
-            teddies.appendChild(price);
+            creerUnProduit(result[index]);
         }
     }).catch(
         function (erreur) {
             console.log(erreur);
         });
+
+function creerTeddies(){
+    let teddies = document.createElement("div");
+    teddies.setAttribute("class", "produitEnListe");
+    return teddies;
+}
+
+function creerUnProduit(product){
+    let produit = document.createElement("a");
+    produit.setAttribute("href", "../html/product.html" + "?id=" + product._id);
+    produit.setAttribute("class", "product");
+    produit.appendChild(photoProduit(product));
+    produit.appendChild(nomProduit(product));
+    produit.appendChild(resumeProduit(product));
+    produit.appendChild(prixProduit(product));
+    listProducts.appendChild(produit);
+}
+
+function nomProduit(product){
+    let boxName = document.createElement("p");
+    boxName.setAttribute("class", "nomProduit");
+    boxName.innerHTML = product.name;
+    return boxName;
+}
+
+function photoProduit(product){
+    let boxPhoto = document.createElement("p");
+    boxPhoto.setAttribute("class", "images");
+    let photo = document.createElement("img");
+    photo.setAttribute("src", product.imageUrl);
+    photo.setAttribute("height", "200px");
+    boxPhoto.appendChild(photo);
+    return boxPhoto;
+}
+
+function resumeProduit(product){
+    let resume = document.createElement("p");
+    resume.setAttribute("class", "resumeProduits");
+    resume.innerHTML = product.description;
+    return resume; 
+}
+
+function prixProduit(product){
+    let price = document.createElement("p");
+    price.innerHTML = product.price/100 + "€";
+    return price;
+}

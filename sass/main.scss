@@ -1,19 +1,21 @@
 @import "./mixins";
+$coul-fond : rgb(243, 233, 241);
+$coul-trait : rgb(143, 91, 254);
 
-body{
-    background-color: rgb(243,233,241);
+body {
+    background-color: $coul-fond;
     @include marges(0px, 0px);
     width: 100%;
 }
 
-header{
+header {
     @include flex (row, space-between, center);
     text-align: center;
     margin: 0px 50px 0px 50px;
-    padding:0px;
+    padding: 0px;
 }
 
-.logoOrinoco{
+.logoOrinoco {
     background-image: url("../images/logoOrinoco2.png");
     background-repeat: no-repeat;
     height: 120px;
@@ -27,49 +29,97 @@ a {
 }
 
 nav {
-    @include bordureArrondie (1px, solid, 
-    rgb(143,91,254), 15px);
+    @include bordureArrondie (1px, solid,
+        $coul-trait, 15px);
     @include flex (column, center, space-around);
-    height:30px;
+    height: 30px;
     width: 300px;
 }
 
-ul{
+ul {
     list-style: none;
     @include flex (row, space-around, space-around);
-    margin : 0px 10px 0px 10px;
+    margin: 0px 10px 0px 10px;
 }
 
-#panier :hover{
+#panier :hover {
     color: blue;
     font-size: 1.1em;
 }
 
-#lienAccueil :hover{
+#lienAccueil :hover {
     font-style: italic;
 }
 
-section{
+section {
     background-color: white;
-    margin: 0px;
-    padding: 50px;
+    @include marges(0px, 50px);
     width: auto;
     color: black;
+}
+
+#list-Products {
+    @include flex(row, center, left);
+}
+
+.product {
+    //ici la mise en forme de chaque produit dans la liste
+    @include bordureArrondie(2px, solid, $coul-trait, 10px);
+    @include marges(5px, 5px);
+    font-weight: normal;
+}
+
+#product-solo {
     @include flex(column, center, left);
 }
 
-footer{
+.images {
     text-align: center;
-    margin:50px;
-    & p{
+    @include marges(10px, 10px);
+}
+
+#titreProduit {
+    font-size: 3em;
+    text-align: center;
+    font-weight: bold;
+}
+
+.nomProduit {
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.resumeProduits{
+    text-align: justify;
+    @include marges(5px, 5px);
+}
+
+.resume, .prix{
+    text-align: center;
+}
+
+.prix{
+    font-weight: bold;
+    font-size : 1.6em;
+}
+
+footer {
+    text-align: center;
+    margin: 50px;
+
+    & p {
         text-decoration: underline;
         font-weight: bold;
+        @include marges(20px, 10px);
     }
+
     & a {
         text-decoration: underline;
         font-weight: normal;
     }
-    & li :hover{
-        color : blue;
-        }
+
+    & li :hover {
+        color: blue;
+    }
 }

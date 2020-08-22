@@ -59,14 +59,65 @@ ul {
 
 section {
   background-color: white;
-  margin: 0px;
   padding: 50px;
+  margin: 0px;
   width: auto;
   color: black;
+}
+
+#list-Products {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: left;
+}
+
+.product {
+  border: 2px solid #8f5bfe;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  font-weight: normal;
+}
+
+#product-solo {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: left;
+}
+
+.images {
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+}
+
+#titreProduit {
+  font-size: 3em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.nomProduit {
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.resumeProduits {
+  text-align: justify;
+  padding: 5px;
+  margin: 5px;
+}
+
+.resume, .prix {
+  text-align: center;
+}
+
+.prix {
+  font-weight: bold;
+  font-size: 1.6em;
 }
 
 footer {
@@ -76,6 +127,8 @@ footer {
 footer p {
   text-decoration: underline;
   font-weight: bold;
+  padding: 10px;
+  margin: 20px;
 }
 footer a {
   text-decoration: underline;

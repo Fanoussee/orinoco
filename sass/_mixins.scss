@@ -17,7 +17,7 @@
     height: $hauteur;
 }
 
-@mixin marges ($int:0px, $ext:0px) {
+@mixin marges ($ext:0px, $int:0px) {
     padding: $int;
     margin: $ext;
 }
