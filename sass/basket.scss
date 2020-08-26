@@ -1,0 +1,60 @@
+@import "./mixins";
+@import "./variables";
+
+//Mise en forme spécifique à la page Panier
+#titrePanier {
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#list-panier {
+    @include flex(column, center, stretch);
+    @include marges(0px, 30px);
+}
+
+.boiteProduit,
+#totalPrix {
+    @include marges(20px, 20px);
+}
+
+.boiteProduit {
+    @include flex(row, space-between, center);
+    border-bottom: 1px solid black;
+}
+
+#couleurProduit {
+    font-size: 1.3em;
+    @include marges(20px);
+
+    & strong {
+        text-decoration: underline;
+        font-weight: bold;
+    }
+}
+
+.prixProduit {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+#totalPrix {
+    @include flex("row", right, center);
+    @include marges(20px, 10px);
+    text-align: right;
+    font-weight: bold;
+
+    & p {
+        @include marges(0px, 10px);
+    }
+}
+
+#boxBtnCommande {
+    @include flex("row", right, center);
+    @include marges(20px, 20px);
+
+    & #btnCommande {
+        text-align: center;
+        @include marges(0px, 10px);
+    }
+}

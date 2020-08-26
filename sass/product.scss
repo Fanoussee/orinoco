@@ -1,0 +1,53 @@
+//Mise en forme spécifique à la page produit
+#product-solo {
+    @include flex(column, center, left);
+    @include bordureArrondie(2px, solid, $coul-trait, 10px);
+    @include marges(50px, 50px);
+}
+
+#titreProduit {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+#image,
+#resume,
+#prix {
+    font-size: 1.6em;
+}
+
+#image,
+#titreProduit {
+    text-align: center;
+}
+
+#descriptionProduit{
+    @include flex(column, center, center);
+}
+
+#resume {
+    width: $maxWidth*2;
+    text-align: justify;
+}
+
+#prix {
+    font-weight: bold;
+    text-align: right;
+}
+
+#choixCouleurs {
+    @include flex(row, right, center);
+
+    & p {
+        @include marges(0px, 10px);
+    }
+}
+
+#bouton {
+    @include flex(row, right, center);
+    margin-top: 30px;
+
+    & button {
+        @include marges(10px, 10px);
+    }
+}

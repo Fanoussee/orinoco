@@ -1,0 +1,42 @@
+//Mise en forme spécifique à la page d'accueil
+#list-Products {
+    @include flex(row, center, left);
+    flex-wrap: wrap;
+}
+
+.product {
+    @include bordureArrondie(2px, solid, $coul-trait, 10px);
+    @include marges(20px, 5px);
+    font-weight: normal;
+    max-width: $maxWidth;
+    color: black;
+}
+
+.boiteImages {
+    text-align: center;
+    @include marges(10px, 10px);
+}
+
+.images {
+    @include marges(5px, 5px);
+    height: $maxWidth / 2;
+}
+
+.nomProduit {
+    @include marges(5px, 5px);
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.resumeProduits {
+    text-align: justify;
+    @include marges(5px, 5px);
+}
+
+.prixProduits {
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.5em;
+    @include marges(5px, 5px);
+}

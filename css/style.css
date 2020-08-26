@@ -1,3 +1,195 @@
+#list-Products {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: left;
+  flex-wrap: wrap;
+}
+
+.product {
+  border: 2px solid #8f5bfe;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 20px;
+  font-weight: normal;
+  max-width: 300px;
+  color: black;
+}
+
+.boiteImages {
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+}
+
+.images {
+  padding: 5px;
+  margin: 5px;
+  height: 150px;
+}
+
+.nomProduit {
+  padding: 5px;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.resumeProduits {
+  text-align: justify;
+  padding: 5px;
+  margin: 5px;
+}
+
+.prixProduits {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: 5px;
+  margin: 5px;
+}
+
+#product-solo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  border: 2px solid #8f5bfe;
+  border-radius: 10px;
+  padding: 50px;
+  margin: 50px;
+}
+
+#titreProduit {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+#image,
+#resume,
+#prix {
+  font-size: 1.6em;
+}
+
+#image,
+#titreProduit {
+  text-align: center;
+}
+
+#descriptionProduit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#resume {
+  width: 600px;
+  text-align: justify;
+}
+
+#prix {
+  font-weight: bold;
+  text-align: right;
+}
+
+#choixCouleurs {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+}
+#choixCouleurs p {
+  padding: 10px;
+  margin: 0px;
+}
+
+#bouton {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  margin-top: 30px;
+}
+#bouton button {
+  padding: 10px;
+  margin: 10px;
+}
+
+#titrePanier {
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+}
+
+#list-panier {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 30px;
+  margin: 0px;
+}
+
+.boiteProduit,
+#totalPrix {
+  padding: 20px;
+  margin: 20px;
+}
+
+.boiteProduit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+#couleurProduit {
+  font-size: 1.3em;
+  padding: 0px;
+  margin: 20px;
+}
+#couleurProduit strong {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.prixProduit {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+#totalPrix {
+  display: flex;
+  flex-direction: "row";
+  justify-content: right;
+  align-items: center;
+  padding: 10px;
+  margin: 20px;
+  text-align: right;
+  font-weight: bold;
+}
+#totalPrix p {
+  padding: 10px;
+  margin: 0px;
+}
+
+#boxBtnCommande {
+  display: flex;
+  flex-direction: "row";
+  justify-content: right;
+  align-items: center;
+  padding: 20px;
+  margin: 20px;
+}
+#boxBtnCommande #btnCommande {
+  text-align: center;
+  padding: 10px;
+  margin: 0px;
+}
+
 body {
   background-color: #f3e9f1;
   padding: 0px;
@@ -88,106 +280,6 @@ footer a {
 }
 footer li :hover {
   color: blue;
-}
-
-#list-Products {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: left;
-  flex-wrap: wrap;
-}
-
-.product {
-  border: 2px solid #8f5bfe;
-  border-radius: 10px;
-  padding: 5px;
-  margin: 20px;
-  font-weight: normal;
-  max-width: 300px;
-  color: black;
-}
-
-.boiteImages {
-  text-align: center;
-  padding: 10px;
-  margin: 10px;
-}
-
-.images {
-  padding: 5px;
-  margin: 5px;
-  height: 150px;
-}
-
-.nomProduit {
-  padding: 5px;
-  margin: 5px;
-  font-weight: bold;
-  font-size: 1.5em;
-  text-align: center;
-}
-
-.resumeProduits {
-  text-align: justify;
-  padding: 5px;
-  margin: 5px;
-}
-
-.prixProduits {
-  text-align: right;
-  font-weight: bold;
-  font-size: 1.5em;
-  padding: 5px;
-  margin: 5px;
-}
-
-#product-solo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-}
-
-#titreProduit {
-  font-size: 3em;
-  text-align: center;
-  font-weight: bold;
-}
-
-#image,
-#resume,
-#prix {
-  text-align: center;
-}
-
-#prix {
-  font-weight: bold;
-  font-size: 1.6em;
-  text-align: right;
-}
-
-#choixCouleurs {
-  display: flex;
-  flex-direction: row;
-  justify-content: right;
-  align-items: center;
-}
-#choixCouleurs p {
-  padding: 10px;
-  margin: 0px;
-}
-
-#bouton {
-  display: flex;
-  flex-direction: row;
-  justify-content: right;
-  align-items: center;
-  margin-top: 30px;
-}
-#bouton button {
-  padding: 10px;
-  margin: 0px;
 }
 
 /*# sourceMappingURL=style.css.map */
