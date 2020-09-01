@@ -1,5 +1,9 @@
-$coul-fond : rgb(243, 233, 241);
+$coul-fond : rgb(65, 65, 65);
 $coul-trait : rgb(143, 91, 254);
+$coul-degrade1 : rgb(212, 128, 59);
+$coul-degrade2 : rgb(142, 90, 253);
+
+$policeOrinoco : 'Orinoco';
 
 $maxWidth : 300px;
 
@@ -11,9 +15,9 @@ $breakpoints : (
 );
 
 $logoOrinoco : (
-    url : "../images/logoOrinoco.png",
-    height : 120px, 
-    width : 266px
+    url : "../images/logoOrinoco3.png",
+    height : 50px, 
+    width : 111px
 );
 
 $nav : (

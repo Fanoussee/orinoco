@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Orinoco";
+  src: url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.eot");
+  src: url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.ttf") format("ttf"), url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.otf") format("otf"), url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.woff2") format("woff2"), url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.woff") format("woff"), url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.svg") format("svg");
+  font-weight: lighter;
+  font-style: normal;
+}
 #list-Products {
   display: flex;
   flex-direction: row;
@@ -6,14 +13,41 @@
   flex-wrap: wrap;
 }
 
-.product {
-  border: 2px solid #8f5bfe;
-  border-radius: 10px;
+.boxProduit {
+  display: flex;
+  transition: all 500ms;
+}
+.boxProduit:hover {
+  transform: scale(1.06);
+}
+
+.boxPrice {
+  position: relative;
+  left: 350px;
+  top: -15px;
+  height: 50px;
+  background-color: purple;
+}
+.boxPrice .prixProduits {
+  text-align: right;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5em;
   padding: 5px;
+  margin: 5px;
+}
+
+.product {
+  border: 1px solid grey;
+  border-radius: 6px;
+  box-shadow: 5px 5px 10px grey;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 10px;
   margin: 20px;
   font-weight: normal;
   max-width: 300px;
   color: black;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .boiteImages {
@@ -33,19 +67,11 @@
   margin: 5px;
   font-weight: bold;
   font-size: 1.5em;
-  text-align: center;
+  text-align: left;
 }
 
 .resumeProduits {
   text-align: justify;
-  padding: 5px;
-  margin: 5px;
-}
-
-.prixProduits {
-  text-align: right;
-  font-weight: bold;
-  font-size: 1.5em;
   padding: 5px;
   margin: 5px;
 }
@@ -170,13 +196,39 @@
   margin: 20px;
   text-align: right;
   font-weight: bold;
+  font-size: 1.8em;
 }
 #totalPrix p {
   padding: 10px;
   margin: 0px;
 }
 
-#boxBtnCommande {
+form {
+  font-size: 1.2em;
+}
+form div {
+  display: flex;
+}
+form div p {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin: 20px;
+}
+form div p label {
+  margin-bottom: 10px;
+}
+form div p input {
+  min-width: 250px;
+  height: 30px;
+}
+
+#legende strong, form strong {
+  font-weight: bold;
+  color: red;
+}
+
+#boxBtn {
   display: flex;
   flex-direction: "row";
   justify-content: right;
@@ -184,17 +236,22 @@
   padding: 20px;
   margin: 20px;
 }
-#boxBtnCommande #btnCommande {
+#boxBtn .bouton {
+  font-size: 1em;
   text-align: center;
   padding: 10px;
-  margin: 0px;
+  margin: 10px;
 }
 
 body {
-  background-color: #f3e9f1;
   padding: 0px;
   margin: 0px;
   width: 100%;
+}
+
+header,
+footer {
+  background-color: #414141;
 }
 
 header {
@@ -203,35 +260,58 @@ header {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  margin: 0px 50px 0px 50px;
+  padding: 10px;
+  margin: 0px;
+  color: white;
+}
+header a {
+  color: white;
+}
+header #titreSite {
+  font-family: "Orinoco";
+  font-weight: lighter;
+  font-size: 1.8em;
+  font-style: oblique;
   padding: 0px;
+  margin: 5px;
 }
 
 .logoOrinoco {
-  background-image: url("../images/logoOrinoco.png");
-  background-repeat: no-repeat;
-  height: 120px;
-  width: 266px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.logoOrinoco i,
+.logoOrinoco p {
+  padding: 0px;
+  margin: 5px;
+  font-size: 1em;
+}
+.logoOrinoco .caddie {
+  background: -webkit-linear-gradient(left, #d4803b, #8e5afd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.logoOrinoco p {
+  font-family: "Orinoco";
+  font-weight: lighter;
 }
 
 a {
   text-decoration: none;
-  color: black;
-  font-weight: bold;
 }
 
 nav {
-  border: 1px solid #8f5bfe;
-  border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
   height: 40px;
   width: 250px;
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-ul {
+nav ul {
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -240,8 +320,7 @@ ul {
   padding: 0px;
   margin: 10px;
 }
-
-li {
+nav li {
   padding: 0px;
   margin: 0px;
 }
@@ -255,8 +334,8 @@ li {
   font-style: italic;
 }
 
-section {
-  background-color: white;
+#list-Products {
+  background-color: #e2e2e2;
   padding: 50px;
   margin: 0px;
   width: auto;
@@ -264,21 +343,35 @@ section {
 }
 
 footer {
-  text-align: center;
-  padding: 0px;
-  margin: 30px;
+  color: white;
+  padding: 20px;
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 footer p {
   text-decoration: underline;
   font-weight: bold;
-  padding: 10px;
-  margin: 20px;
+  padding: 0px;
+  margin: 0px;
 }
 footer a {
-  text-decoration: underline;
+  text-decoration: none;
   font-weight: normal;
+  color: white;
 }
-footer li :hover {
+footer ul {
+  list-style: none;
+  padding: 5px;
+  margin: 5px;
+}
+footer ul li {
+  padding: 0px;
+  margin: 10px;
+}
+footer ul li :hover {
   color: blue;
 }
 

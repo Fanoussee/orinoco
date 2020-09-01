@@ -4,12 +4,38 @@
     flex-wrap: wrap;
 }
 
+.boxProduit{
+    display : flex;
+    transition: all 500ms;
+    &:hover {
+        transform: scale(1.06);
+    }
+}
+
+.boxPrice {
+    position: relative;
+    left: 350px;
+    top : -15px;
+    height: 50px;
+    background-color: purple;
+    & .prixProduits {
+        text-align: right;
+        color : white;
+        font-weight: bold;
+        font-size: 1.5em;
+        @include marges(5px, 5px);
+    }
+}
+
 .product {
-    @include bordureArrondie(2px, solid, $coul-trait, 10px);
-    @include marges(20px, 5px);
+    @include bordureArrondie(1px, solid, grey, 6px);
+    box-shadow: 5px 5px 10px grey;
+    background-color: rgba(255, 255, 255, 0.6);
+    @include marges(20px, 10px);
     font-weight: normal;
     max-width: $maxWidth;
     color: black;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .boiteImages {
@@ -26,17 +52,10 @@
     @include marges(5px, 5px);
     font-weight: bold;
     font-size: 1.5em;
-    text-align: center;
+    text-align: left;
 }
 
 .resumeProduits {
     text-align: justify;
-    @include marges(5px, 5px);
-}
-
-.prixProduits {
-    text-align: right;
-    font-weight: bold;
-    font-size: 1.5em;
     @include marges(5px, 5px);
 }

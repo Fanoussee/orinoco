@@ -3,35 +3,7 @@ let id = url.searchParams.get("id");
 let productSolo = document.getElementById("product-solo");
 let produit = "";
 let localStock = localStorage;
-console.log("localStock sur la page Produit");
-console.log(localStock);
 let colorSelect = "";
-
-function accesApi(type, url, envoi) {
-    type = type.toUpperCase();
-    let erreur = "Erreur de requête !";
-    if (type == "GET" || type == "POST") {
-        return new Promise(function (resolve, reject) {
-            let request = new XMLHttpRequest();
-            let statut = true;
-            request.onreadystatechange = function () {
-                if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                    resolve(JSON.parse(this.response));
-                } else {
-                    statut = false;
-                }
-            };
-            if (!(statut)) {
-                reject(erreur);
-            }
-            request.open(type, url);
-            request.send(envoi);
-        });
-    } else {
-        statut = false;
-        console.error("Erreur de type de requête. Choisir entre GET et POST.");
-    }
-}
 
 let accesApiTeddies = accesApi("get", "http://localhost:3000/api/teddies/" + id, null);
 accesApiTeddies.then(
@@ -44,19 +16,13 @@ accesApiTeddies.then(
             console.log(erreur);
         });
 
-function produitEnCours() {
-    if(localStock.length == 0){
-        localStock.setItem("photo"+0, produit.imageUrl);
-        localStock.setItem("nom"+0, produit.name);
-        localStock.setItem("couleur"+0, colorSelect);
-        localStock.setItem("prix"+0, produit.price);
-    }else{
-        let compteur = localStock.length/4;
-        localStock.setItem("photo"+compteur, produit.imageUrl);
-        localStock.setItem("nom"+compteur, produit.name);
-        localStock.setItem("couleur"+compteur, colorSelect);
-        localStock.setItem("prix"+compteur, produit.price);
-    }
+function creerFicheProduit() {
+    productSolo.appendChild(nomProduit());
+    productSolo.appendChild(photoProduit());
+    productSolo.appendChild(resumeProduit());
+    productSolo.appendChild(prixProduit());
+    productSolo.appendChild(choixCouleurs());
+    productSolo.appendChild(boutonsPanier());
 }
 
 function ajouterAuPanier() {
@@ -64,27 +30,7 @@ function ajouterAuPanier() {
     bouton.addEventListener("click", function () {
         selectionCouleur();
         produitEnCours();
-        console.log("localStock après clic sur Ajout au panier");
-        console.log(localStock);
     });
-}
-
-function selectionCouleur() {
-    let select = document.getElementById("couleur");
-    colorSelect = document.getElementById("couleur").value;
-    select.addEventListener("click", function () {
-        colorSelect = document.getElementById("couleur").value;
-    });
-    console.log(colorSelect);
-}
-
-function creerFicheProduit() {
-    productSolo.appendChild(nomProduit());
-    productSolo.appendChild(photoProduit());
-    productSolo.appendChild(resumeProduit());
-    productSolo.appendChild(prixProduit());
-    productSolo.appendChild(choixCouleurs());
-    productSolo.appendChild(boutonPanier());
 }
 
 function nomProduit() {
@@ -150,18 +96,58 @@ function couleursProduit() {
     return form;
 }
 
-function boutonPanier() {
-    let boiteBouton = document.createElement("div");
-    boiteBouton.setAttribute("id", "bouton");
+function boutonsPanier() {
+    let boiteBoutons = document.createElement("div");
+    boiteBoutons.setAttribute("id", "bouton");
+    boiteBoutons.appendChild(btnVoirPanier());
+    boiteBoutons.appendChild(btnAjouterPanier());
+    return boiteBoutons;
+}
+
+function btnVoirPanier(){
     let btnVoirPanier = document.createElement("button");
     btnVoirPanier.setAttribute("type", "button");
     btnVoirPanier.innerHTML = "Voir le panier";
     btnVoirPanier.setAttribute("OnClick", "window.location='basket.html'");
-    boiteBouton.appendChild(btnVoirPanier);
-    let boutonPanier = document.createElement("button");
-    boutonPanier.setAttribute("id", "boutonPanier");
-    boutonPanier.setAttribute("type", "button");
-    boutonPanier.innerHTML = "Ajouter au panier";
-    boiteBouton.appendChild(boutonPanier);
-    return boiteBouton;
+    return btnVoirPanier;
+}
+
+function btnAjouterPanier(){
+    let btnAjouterPanier = document.createElement("button");
+    btnAjouterPanier.setAttribute("id", "boutonPanier");
+    btnAjouterPanier.setAttribute("type", "button");
+    btnAjouterPanier.innerHTML = "Ajouter au panier";
+    return btnAjouterPanier;
+}
+
+function selectionCouleur() {
+    let select = document.getElementById("couleur");
+    colorSelect = document.getElementById("couleur").value;
+    select.addEventListener("click", function () {
+        colorSelect = document.getElementById("couleur").value;
+    });
+}
+
+function produitEnCours() {
+    if (localStock.length == 0) {
+        localStock.setItem("id" + 0, produit._id);
+        localStock.setItem("photo" + 0, produit.imageUrl);
+        localStock.setItem("nom" + 0, produit.name);
+        localStock.setItem("couleur" + 0, colorSelect);
+        localStock.setItem("prix" + 0, produit.price);
+        //let tempprod = [produit._id];
+        //localStock.setItem("products", JSON.stringify(tempprod));
+    } else {
+        console.log(localStock.length);
+        let compteur = (localStock.length /*- 1*/) / 5;
+        localStock.setItem("id" + compteur, produit._id);
+        localStock.setItem("photo" + compteur, produit.imageUrl);
+        localStock.setItem("nom" + compteur, produit.name);
+        localStock.setItem("couleur" + compteur, colorSelect);
+        localStock.setItem("prix" + compteur, produit.price);
+        //let tempprod = JSON.parse(localStock.getItem("products"));
+        //tempprod.push(produit._id);
+        //localStock.setItem("products", JSON.stringify(tempprod));
+    }
+    console.log(localStock);
 }

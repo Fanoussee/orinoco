@@ -1,4 +1,5 @@
 @import "./mixins";
+@import "./fonts";
 @import "./variables";
 @import "./index.scss";
 @import "./product.scss";
@@ -6,47 +7,72 @@
 
 //Mise en forme commune à toutes les pages
 body {
-    background-color: $coul-fond;
     @include marges(0px, 0px);
     width: 100%;
+}
+
+header,
+footer {
+    background-color: $coul-fond;
 }
 
 header {
     @include flex (row, space-between, center);
     text-align: center;
-    margin: 0px 50px 0px 50px;
-    padding: 0px;
+    @include marges(0px, 10px);
+    color: white;
+
+    & a {
+        color: white;
+    }
+
+    & #titreSite {
+        font-family: 'Orinoco';
+        font-weight: lighter;
+        font-size: 1.8em;
+        font-style: oblique;
+        @include marges(5px, 0px);
+    }
 }
 
 .logoOrinoco {
-    background-image: url(map-get($logoOrinoco, url));
-    background-repeat: no-repeat;
-    height: map-get($logoOrinoco, height);
-    width: map-get($logoOrinoco, width);
+    @include flex(row, center, center);
+
+    & i,
+    p {
+        @include marges(5px, 0px);
+        font-size: 1em;
+    }
+
+    & .caddie {
+        @include degraderCouleurs(left, $coul-degrade1, $coul-degrade2);
+    }
+
+    & p {
+        font-family: $policeOrinoco;
+        font-weight: lighter;
+    }
 }
 
 a {
     text-decoration: none;
-    color: black;
-    font-weight: bold;
 }
 
 nav {
-    @include bordureArrondie (1px, solid,
-        $coul-trait, 15px);
     @include flex (column, center, stretch);
     height: map-get($nav, height);
     width: map-get($nav, width);
-}
+    font-family: Arial, Helvetica, sans-serif;
 
-ul {
-    list-style: none;
-    @include flex (row, space-around, center);
-    @include marges(10px, 0px);
-}
+    & ul {
+        list-style: none;
+        @include flex (row, space-around, center);
+        @include marges(10px, 0px);
+    }
 
-li {
-    @include marges(0px, 0px);
+    & li {
+        @include marges(0px, 0px);
+    }
 }
 
 #panier :hover {
@@ -58,29 +84,40 @@ li {
     font-style: italic;
 }
 
-section {
-    background-color: white;
+#list-Products {
+    background-color: rgb(226, 226, 226);
     @include marges(0px, 50px);
     width: auto;
     height: auto;
 }
 
 footer {
-    text-align: center;
-    @include marges(30px, 0px);
+    color: white;
+    @include marges(0px, 20px);
+    @include flex(row, space-between, flex-end);
 
     & p {
         text-decoration: underline;
         font-weight: bold;
-        @include marges(20px, 10px);
+        @include marges(0px, 0px);
     }
 
     & a {
-        text-decoration: underline;
+        text-decoration: none;
         font-weight: normal;
+        color: white;
     }
 
-    & li :hover {
-        color: blue;
+    & ul {
+        list-style: none;
+        @include marges(5px, 5px);
+
+        & li {
+            @include marges(10px);
+
+            & :hover {
+                color: blue;
+            }
+        }
     }
 }

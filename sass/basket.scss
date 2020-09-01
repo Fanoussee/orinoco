@@ -43,18 +43,50 @@
     @include marges(20px, 10px);
     text-align: right;
     font-weight: bold;
+    font-size: 1.8em;
 
     & p {
         @include marges(0px, 10px);
     }
 }
 
-#boxBtnCommande {
+form {
+    font-size: 1.2em;
+
+    & div {
+        display: flex;
+
+        & p {
+            display: flex;
+            flex-direction: column;
+            @include marges(20px, 0px);
+
+            & label {
+                margin-bottom: 10px;
+            }
+
+            & input {
+                min-width: 250px;
+                height: 30px;
+            }
+        }
+    }
+}
+
+#legende, form {
+    & strong {
+        font-weight: bold;
+        color: red;
+    }
+}
+
+#boxBtn {
     @include flex("row", right, center);
     @include marges(20px, 20px);
 
-    & #btnCommande {
+    & .bouton {
+        font-size: 1em;
         text-align: center;
-        @include marges(0px, 10px);
+        @include marges(10px, 10px);
     }
 }

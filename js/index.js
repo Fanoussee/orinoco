@@ -1,31 +1,5 @@
 let listProducts = document.getElementById("list-Products");
 
-function accesApi(type, url, envoi) {
-    type = type.toUpperCase();
-    let erreur = "Erreur de requête !";
-    if (type == "GET" || type == "POST") {
-        return new Promise(function (resolve, reject) {
-            let request = new XMLHttpRequest();
-            let statut = true;
-            request.onreadystatechange = function () {
-                if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                    resolve(JSON.parse(this.response));
-                } else {
-                    statut = false;
-                }
-            };
-            if (!(statut)) {
-                reject(erreur);
-            }
-            request.open(type, url);
-            request.send(envoi);
-        });
-    } else {
-        statut = false;
-        console.error("Erreur de type de requête. Choisir entre GET et POST.");
-    }
-}
-
 let accesApiTeddies = accesApi("get", "http://localhost:3000/api/teddies", null);
 accesApiTeddies.then(
     function (result) {
@@ -38,31 +12,32 @@ accesApiTeddies.then(
             console.log(erreur);
         });
 
-function creerTeddies(){
+function creerTeddies() {
     let teddies = document.createElement("div");
     teddies.setAttribute("class", "produitEnListe");
     return teddies;
 }
 
-function creerUnProduit(product){
+function creerUnProduit(product) {
+    //Création d'une boîte Produit contenant le produit et la boîte du prix
+    let boxProduit = document.createElement("div");
+    boxProduit.setAttribute("class", "boxProduit");
+    //Création du produit
     let produit = document.createElement("a");
     produit.setAttribute("href", "../html/product.html" + "?id=" + product._id);
     produit.setAttribute("class", "product");
     produit.appendChild(photoProduit(product));
     produit.appendChild(nomProduit(product));
     produit.appendChild(resumeProduit(product));
-    produit.appendChild(prixProduit(product));
-    listProducts.appendChild(produit);
+    //Ajout de la boîte du prix à la boîte Produit
+    boxProduit.appendChild(boxPrice(product));
+    //Ajout du produit à la boîte Produit
+    boxProduit.appendChild(produit);
+    //Ajout de la boîte Produit à la liste des produits
+    listProducts.appendChild(boxProduit);
 }
 
-function nomProduit(product){
-    let boxName = document.createElement("p");
-    boxName.setAttribute("class", "nomProduit");
-    boxName.innerHTML = product.name;
-    return boxName;
-}
-
-function photoProduit(product){
+function photoProduit(product) {
     let boxPhoto = document.createElement("p");
     boxPhoto.setAttribute("class", "boiteImages");
     let photo = document.createElement("img");
@@ -72,16 +47,30 @@ function photoProduit(product){
     return boxPhoto;
 }
 
-function resumeProduit(product){
+function nomProduit(product) {
+    let boxName = document.createElement("p");
+    boxName.setAttribute("class", "nomProduit");
+    boxName.innerHTML = product.name;
+    return boxName;
+}
+
+function resumeProduit(product) {
     let resume = document.createElement("p");
     resume.setAttribute("class", "resumeProduits");
     resume.innerHTML = product.description;
-    return resume; 
+    return resume;
 }
 
-function prixProduit(product){
+function boxPrice(product) {
+    let boxPrice = document.createElement("p");
+    boxPrice.setAttribute("class", "boxPrice");
+    boxPrice.appendChild(prixProduit(product));
+    return boxPrice;
+}
+
+function prixProduit(product) {
     let price = document.createElement("p");
     price.setAttribute("class", "prixProduits");
-    price.innerHTML = product.price/100 + "€";
+    price.innerHTML = product.price / 100 + "€";
     return price;
 }
