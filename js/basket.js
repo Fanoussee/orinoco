@@ -2,6 +2,8 @@ let produitsSelectionnes = localStorage;
 let panier = document.getElementById("list-panier");
 let totalPrix = 0;
 let products = [];
+let contact = new Map();
+let donneesValides;
 
 //Insertion du titre de la page
 let titrePanier = document.createElement("h2");
@@ -22,7 +24,7 @@ if (produitsSelectionnes.length == 0) {
     totalArticles();
     creerFormulaire();
     boiteBoutons();
-    console.log(products);
+    //console.log(products);
 }
 
 //Création d'une boîte qui contiendra un produit
@@ -104,6 +106,7 @@ function creerNom(){
     saisieNom.setAttribute("type", "text");
     saisieNom.setAttribute("name", "nom");
     saisieNom.setAttribute("minlength", "3");
+    saisieNom.setAttribute("id", "nom");
     nom.appendChild(labelNom);
     nom.appendChild(saisieNom);
     return nom;
@@ -119,6 +122,7 @@ function creerPrenom(){
     saisiePrenom.setAttribute("type", "text");
     saisiePrenom.setAttribute("name", "prenom");
     saisiePrenom.setAttribute("minlength", "3");
+    saisiePrenom.setAttribute("id", "prenom");
     prenom.appendChild(labelPrenom);
     prenom.appendChild(saisiePrenom);
     return prenom;
@@ -138,9 +142,10 @@ function creerRue(){
     labelRue.innerHTML = "Adresse" + "<strong>*</strong";
     let saisieRue = document.createElement("input");
     saisieRue.setAttribute("required", "true");
-    saisieRue.setAttribute("type", "text");
+    saisieRue.setAttribute("type", "adress");
     saisieRue.setAttribute("name", "adresse");
     saisieRue.setAttribute("minlength", "3");
+    saisieRue.setAttribute("id", "adresse");
     rue.appendChild(labelRue);
     rue.appendChild(saisieRue);
     return rue;
@@ -156,6 +161,7 @@ function creerVille(){
     saisieVille.setAttribute("type", "text");
     saisieVille.setAttribute("name", "ville");
     saisieVille.setAttribute("minlength", "3");
+    saisieVille.setAttribute("id", "ville");
     ville.appendChild(labelVille);
     ville.appendChild(saisieVille);
     return ville;
@@ -171,6 +177,7 @@ function creerEmail(){
     saisieEmail.setAttribute("required", "true");
     saisieEmail.setAttribute("type", "email");
     saisieEmail.setAttribute("name", "email");
+    saisieEmail.setAttribute("id", "email");
     email.appendChild(labelEmail);
     email.appendChild(saisieEmail);
     boiteEmail.appendChild(email);
@@ -188,6 +195,7 @@ function boiteBoutons() {
     let boxBtn = document.createElement("div");
     boxBtn.setAttribute("id", "boxBtn");
     boxBtn.appendChild(viderPanier());
+    verifDonnees();
     boxBtn.appendChild(validerCommande());
     panier.appendChild(boxBtn);
 }
@@ -207,8 +215,95 @@ function viderPanier() {
 function validerCommande() {
     let btnCommande = document.createElement("button");
     btnCommande.setAttribute("class", "bouton");
-    btnCommande.setAttribute("type", "button");
-    btnCommande.setAttribute("OnClick", "window.location='ordered.html'");
+    btnCommande.setAttribute("type", "submit");
     btnCommande.innerHTML = "Valider la commande";
+    btnCommande.addEventListener("click", function(event){
+        if(contact.size == 5){
+            window.location = "./ordered.html";
+            let ordered = document.getElementById("ordered");
+            console.log(ordered);
+            //let titre = document.createElement("h2");
+            //titre.innerHTML = "Je suis sur la validation de la commande";
+            //ordered.appendChild(titre);
+        }else{
+            alert("erreur de saisie");
+            console.log(donneesValides);
+        }
+        console.log(contact);
+    });
     return btnCommande;
+}
+
+function verifDonnees(){
+    verifNom();
+    verifPrenom();  
+    verifAdresse();
+    verifVille();
+    verifEmail();
+}
+
+function verifNom(){
+    let nom = document.getElementById("nom");
+    nom.addEventListener("change", function(event){
+        let saisie = event.target.value;
+        let tailleSaisie = saisie.length;
+        if(tailleSaisie >= 3){
+            donneesValides = true;
+            contact.set("nom", saisie);
+        }else{
+            donneesValides = false;
+        }
+    });
+}
+
+function verifPrenom(){
+    let prenom = document.getElementById("prenom");
+    prenom.addEventListener("change", function(event){
+        let saisie = event.target.value;
+        let tailleSaisie = saisie.length;
+        if(tailleSaisie >= 3 && donneesValides){
+            contact.set("prenom", saisie);
+        }else{
+            donneesValides = false;
+        }
+    });
+}
+
+function verifAdresse(){
+    let adresse = document.getElementById("adresse");
+    adresse.addEventListener("change", function(event){
+        let saisie = event.target.value;
+        let tailleSaisie = saisie.length;
+        if(tailleSaisie >= 3 && donneesValides){
+            contact.set("adresse", saisie);
+        }else{
+            donneesValides = false;
+        }
+    });
+}
+
+function verifVille(){
+    let ville = document.getElementById("ville");
+    ville.addEventListener("change", function(event){
+        let saisie = event.target.value;
+        let tailleSaisie = saisie.length;
+        if(tailleSaisie >= 3 && donneesValides){
+            contact.set("ville", saisie);
+        }else{
+            donneesValides = false;
+        }
+    });
+}
+
+function verifEmail(){
+    let email = document.getElementById("email");
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    email.addEventListener("change", function(event){
+        let saisie = event.target.value;
+        if(saisie.match(regex) && donneesValides){
+            contact.set("email", saisie);
+        }else{
+            donneesValides = false;
+        }
+    });
 }
