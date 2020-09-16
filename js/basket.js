@@ -1,30 +1,49 @@
+//Fichier javascript exclusivement réservé à la page Panier du site Oriteddies
+
+//Variable récupérant le localStorage, les produits sélectionnés par l'utilisateur
 let produitsSelectionnes = localStorage;
+//Variable récupérant la boîte html qui contiendra les instances du panier
 let panier = document.getElementById("list-panier");
+//Variable qui contient le prix total des produits sélectionnés
 let totalPrix = 0;
+//Tableau qui contient uniquement les id des produits sélectionnés
 let products = [];
+//Map qui contient les informations de contact saisies par l'utilisateur
 let contact = new Map();
+//Booléen qui confirme ou infirme la validité des données saisies par l'utilisateur
 let donneesValides;
 
-//Insertion du titre de la page
-let titrePanier = document.createElement("h2");
-titrePanier.innerHTML = "Panier ";
-titrePanier.setAttribute("id", "titrePanier");
-panier.appendChild(titrePanier);
+//Création du titre de la page
+creerTitrePage();
 
+//Vérification du panier :
+//S'il est vide affichage "Le panier est vide !" à la place du titre "Panier" précédemment créé
+//Sinon création de la liste des produits sélectionnés
 if (produitsSelectionnes.length == 0) {
     let panierVide = document.createElement("h3");
     panierVide.innerHTML = "Le panier est vide !";
     panier.appendChild(panierVide);
 } else {
+    //La taille des produits sélectionnées est divisée par  car elle contient cinq informations :
+    //L'id, le nom, la photo, la personnalisation et le prix
     let tailleProdSelect = produitsSelectionnes.length / 5;
     for (let index = 0; index < tailleProdSelect; index++) {
+        //Récupération de l'identifiant dans le tableau "products" pour pouvoir l'envoyer ensuite à la commande
         products.push(produitsSelectionnes.getItem("id" + index));
         creerProduit(index);
     }
     totalArticles();
     creerFormulaire();
     boiteBoutons();
-    //console.log(products);
+}
+
+//Liste des fonctions utilisées
+
+function creerTitrePage() {
+    let titrePanier = document.createElement("h2");
+    titrePanier.innerHTML = "Panier ";
+    titrePanier.setAttribute("id", "titrePanier");
+    panier.appendChild(titrePanier);
 }
 
 //Création d'une boîte qui contiendra un produit
@@ -78,24 +97,23 @@ function totalArticles() {
     panier.appendChild(boxTotal);
 }
 
-function creerFormulaire(){
+function creerFormulaire() {
     let form = document.createElement("form");
     form.appendChild(creerNoms());
     form.appendChild(creerAdresse());
     form.appendChild(creerEmail());
     form.appendChild(creerLegende());
     panier.appendChild(form);
-
 }
 
-function creerNoms(){
+function creerNoms() {
     let noms = document.createElement("div");
     noms.appendChild(creerNom());
     noms.appendChild(creerPrenom());
     return noms;
 }
 
-function creerNom(){
+function creerNom() {
     let nom = document.createElement("p");
     let labelNom = document.createElement("label");
     labelNom.setAttribute("for", "nom");
@@ -112,7 +130,7 @@ function creerNom(){
     return nom;
 }
 
-function creerPrenom(){
+function creerPrenom() {
     let prenom = document.createElement("p");
     let labelPrenom = document.createElement("label");
     labelPrenom.setAttribute("for", "prenom");
@@ -128,14 +146,14 @@ function creerPrenom(){
     return prenom;
 }
 
-function creerAdresse(){
+function creerAdresse() {
     let adresse = document.createElement("div");
     adresse.appendChild(creerRue());
     adresse.appendChild(creerVille());
     return adresse;
 }
 
-function creerRue(){
+function creerRue() {
     let rue = document.createElement("p");
     let labelRue = document.createElement("label");
     labelRue.setAttribute("for", "adresse");
@@ -151,7 +169,7 @@ function creerRue(){
     return rue;
 }
 
-function creerVille(){
+function creerVille() {
     let ville = document.createElement("p");
     let labelVille = document.createElement("label");
     labelVille.setAttribute("for", "ville");
@@ -167,7 +185,7 @@ function creerVille(){
     return ville;
 }
 
-function creerEmail(){
+function creerEmail() {
     let boiteEmail = document.createElement("div");
     let email = document.createElement("p");
     let labelEmail = document.createElement("label");
@@ -184,7 +202,7 @@ function creerEmail(){
     return boiteEmail;
 }
 
-function creerLegende(){
+function creerLegende() {
     let legende = document.createElement("p");
     legende.setAttribute("id", "legende");
     legende.innerHTML = "<strong>*</strong> : Champs obligatoires.";
@@ -212,97 +230,114 @@ function viderPanier() {
     return btnVider;
 }
 
+//Si le panier est vide et que l'utilisateur clique sur le bouton valider commande
+//Alors affichage d'une fenêtre d'alerte et rafraichissement de la page panier
+//Si les données ont été correctement saisies par l'utilisateur
+//Alors transformation du tableau Products et Contact en objet pour faciliter l'envoi en requête POST
+
 function validerCommande() {
     let btnCommande = document.createElement("button");
     btnCommande.setAttribute("class", "bouton");
     btnCommande.setAttribute("type", "submit");
     btnCommande.innerHTML = "Valider la commande";
-    btnCommande.addEventListener("click", function(event){
-        if(contact.size == 5){
-            window.location = "./ordered.html";
-            let ordered = document.getElementById("ordered");
-            console.log(ordered);
-            //let titre = document.createElement("h2");
-            //titre.innerHTML = "Je suis sur la validation de la commande";
-            //ordered.appendChild(titre);
-        }else{
+    btnCommande.addEventListener("click", function () {
+        if (products.length == 0) {
+            alert("Votre panier est vide ! ");
+            window.location = "./basket.html";
+        } else if (donneesValides) {
+            let objet = {
+                "contact": convertMapToObject(contact),
+                "products": products
+            };
+            let reqPost = accesApi("post", "http://localhost:3000/api/teddies/order", objet);
+            reqPost.then(function (result) {
+                let prenom = result.contact.firstName;
+                let nom = result.contact.lastName;
+                let idCommande = result.orderId;
+                window.location = "./ordered.html" + "?prenom=" + prenom + "&nom=" + nom + "&total=" + totalPrix + "&id=" + idCommande;
+            }).catch(function (error) {
+                alert(error);
+            });
+        } else {
             alert("erreur de saisie");
-            console.log(donneesValides);
         }
-        console.log(contact);
     });
     return btnCommande;
 }
 
-function verifDonnees(){
+function creerBoutonValiderCommande() {
+
+}
+
+function verifDonnees() {
     verifNom();
-    verifPrenom();  
+    verifPrenom();
     verifAdresse();
     verifVille();
     verifEmail();
 }
 
-function verifNom(){
+function verifNom() {
     let nom = document.getElementById("nom");
-    nom.addEventListener("change", function(event){
+    nom.addEventListener("change", function (event) {
         let saisie = event.target.value;
         let tailleSaisie = saisie.length;
-        if(tailleSaisie >= 3){
+        if (tailleSaisie >= 3) {
             donneesValides = true;
-            contact.set("nom", saisie);
-        }else{
+            contact.set("lastName", saisie);
+        } else {
             donneesValides = false;
         }
     });
 }
 
-function verifPrenom(){
+function verifPrenom() {
     let prenom = document.getElementById("prenom");
-    prenom.addEventListener("change", function(event){
+    prenom.addEventListener("change", function (event) {
         let saisie = event.target.value;
         let tailleSaisie = saisie.length;
-        if(tailleSaisie >= 3 && donneesValides){
-            contact.set("prenom", saisie);
-        }else{
+        if (tailleSaisie >= 3) {
+            contact.set("firstName", saisie);
+        } else {
             donneesValides = false;
         }
     });
 }
 
-function verifAdresse(){
+function verifAdresse() {
     let adresse = document.getElementById("adresse");
-    adresse.addEventListener("change", function(event){
+    adresse.addEventListener("change", function (event) {
         let saisie = event.target.value;
         let tailleSaisie = saisie.length;
-        if(tailleSaisie >= 3 && donneesValides){
-            contact.set("adresse", saisie);
-        }else{
+        if (tailleSaisie >= 3) {
+            contact.set("address", saisie);
+        } else {
             donneesValides = false;
         }
     });
 }
 
-function verifVille(){
+function verifVille() {
     let ville = document.getElementById("ville");
-    ville.addEventListener("change", function(event){
+    ville.addEventListener("change", function (event) {
         let saisie = event.target.value;
         let tailleSaisie = saisie.length;
-        if(tailleSaisie >= 3 && donneesValides){
-            contact.set("ville", saisie);
-        }else{
+        if (tailleSaisie >= 3) {
+            contact.set("city", saisie);
+        } else {
             donneesValides = false;
         }
     });
 }
 
-function verifEmail(){
+function verifEmail() {
     let email = document.getElementById("email");
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    email.addEventListener("change", function(event){
+    email.addEventListener("change", function (event) {
         let saisie = event.target.value;
-        if(saisie.match(regex) && donneesValides){
+        if (saisie.match(regex)) {
             contact.set("email", saisie);
-        }else{
+        } else {
             donneesValides = false;
         }
     });

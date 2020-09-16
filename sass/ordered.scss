@@ -1,0 +1,20 @@
+#validationCommande{
+    @include marges(0px, 100px);
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: purple;
+}
+
+#titreMerci, #montantCommande, #numeroCommande{
+    @include marges(0px, 20px);
+    text-align: center;
+    font-weight: normal;
+    background-color: white;
+}
+
+#titreMerci{
+    padding-top: 50px;
+}
+
+#numeroCommande{
+    padding-bottom: 50px;
+}

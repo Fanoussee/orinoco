@@ -243,6 +243,29 @@ form div p input {
   margin: 10px;
 }
 
+#validationCommande {
+  padding: 100px;
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: purple;
+}
+
+#titreMerci, #montantCommande, #numeroCommande {
+  padding: 20px;
+  margin: 0px;
+  text-align: center;
+  font-weight: normal;
+  background-color: white;
+}
+
+#titreMerci {
+  padding-top: 50px;
+}
+
+#numeroCommande {
+  padding-bottom: 50px;
+}
+
 body {
   padding: 0px;
   margin: 0px;

@@ -1,10 +1,20 @@
+//Fichier javascript exclusivement réservé à la page Produit pour un "teddy" du site Oriteddies
+
+//Variable qui récupère l'url de la page product.html avec l'identifiant comme paramètre
 let url = new URL(window.location.href);
+//Variable récupérant l'identifiant du produit sélectionné
 let id = url.searchParams.get("id");
+//Variable récupérant la boîte html qui contiendra le produit sélectionné
 let productSolo = document.getElementById("product-solo");
+//Variable contenant toutes les informations du produit sélectionné
 let produit = "";
+//Variable récupérant les valeurs contenues dans le localStorage
+//Le localStorage contient éventuellement les produits sélectionnés dans le panier
 let localStock = localStorage;
+//Variable qui contiendra la couleur sélectionnée par l'utilisateur
 let colorSelect = "";
 
+//Variable récupérant la promesse de la requête d'accès à l'API teddies
 let accesApiTeddies = accesApi("get", "http://localhost:3000/api/teddies/" + id, null);
 accesApiTeddies.then(
     function (result) {
@@ -13,8 +23,12 @@ accesApiTeddies.then(
         ajouterAuPanier();
     }).catch(
         function (erreur) {
-            console.log(erreur);
+            let alerte = document.createElement("h2");
+            alerte.innerHTML = erreur;
+            productSolo.appendChild(alerte);
         });
+
+//Liste des fonctions utilisées
 
 function creerFicheProduit() {
     productSolo.appendChild(nomProduit());
@@ -135,19 +149,12 @@ function produitEnCours() {
         localStock.setItem("nom" + 0, produit.name);
         localStock.setItem("couleur" + 0, colorSelect);
         localStock.setItem("prix" + 0, produit.price);
-        //let tempprod = [produit._id];
-        //localStock.setItem("products", JSON.stringify(tempprod));
     } else {
-        console.log(localStock.length);
-        let compteur = (localStock.length /*- 1*/) / 5;
+        let compteur = (localStock.length) / 5;
         localStock.setItem("id" + compteur, produit._id);
         localStock.setItem("photo" + compteur, produit.imageUrl);
         localStock.setItem("nom" + compteur, produit.name);
         localStock.setItem("couleur" + compteur, colorSelect);
         localStock.setItem("prix" + compteur, produit.price);
-        //let tempprod = JSON.parse(localStock.getItem("products"));
-        //tempprod.push(produit._id);
-        //localStock.setItem("products", JSON.stringify(tempprod));
     }
-    console.log(localStock);
 }

@@ -1,22 +1,24 @@
+//Ce fichier javascript est exclusivement réservé à la page d'accueil du site Oriteddies
+
+//Variable qui récupère le contenant de la liste des produits
 let listProducts = document.getElementById("list-Products");
 
+//Variable récupérant la promesse de la requête d'accès à l'API teddies
 let accesApiTeddies = accesApi("get", "http://localhost:3000/api/teddies", null);
 accesApiTeddies.then(
     function (result) {
-        listProducts.appendChild(creerTeddies());
         for (let index = 0; index < result.length; index++) {
             creerUnProduit(result[index]);
         }
     }).catch(
         function (erreur) {
-            console.log(erreur);
+            let alerte = document.createElement("h2");
+            alerte.innerHTML = erreur;
+            listProducts.appendChild(alerte);
         });
 
-function creerTeddies() {
-    let teddies = document.createElement("div");
-    teddies.setAttribute("class", "produitEnListe");
-    return teddies;
-}
+
+//Liste des fonctions utilisées 
 
 function creerUnProduit(product) {
     //Création d'une boîte Produit contenant le produit et la boîte du prix
