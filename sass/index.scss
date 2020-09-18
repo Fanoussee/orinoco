@@ -1,7 +1,11 @@
 //Mise en forme spécifique à la page d'accueil
-#list-Products {
-    @include flex(row, center, left);
-    flex-wrap: wrap;
+
+.groupeProduits{
+    @include marges(20px, 0px);
+    @include flex(row, center, center);
+    @include mobile{
+        @include marges(0px, 0px);
+    }
 }
 
 .boxProduit{
@@ -9,6 +13,16 @@
     transition: all 500ms;
     &:hover {
         transform: scale(1.06);
+        @include mobile{
+            transform: none;
+        }
+    }
+    @include mobile{
+        padding-left: -300px;
+    }
+    @include mobile{
+        @include flex(column, center, center);
+        
     }
 }
 
@@ -25,6 +39,9 @@
         font-size: 1.5em;
         @include marges(5px, 5px);
     }
+    @include mobile{
+        display: none;
+    }
 }
 
 .product {
@@ -33,9 +50,12 @@
     background-color: rgba(255, 255, 255, 0.6);
     @include marges(20px, 10px);
     font-weight: normal;
-    max-width: $maxWidth;
+    width: $largeur;
     color: black;
     font-family: Arial, Helvetica, sans-serif;
+    @include mobile{
+        @include marges(10px, 10px);
+    }
 }
 
 .boiteImages {
@@ -45,7 +65,7 @@
 
 .images {
     @include marges(5px, 5px);
-    height: $maxWidth / 2;
+    height: $largeur / 2;
 }
 
 .nomProduit {

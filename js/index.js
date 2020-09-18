@@ -7,9 +7,15 @@ let listProducts = document.getElementById("list-Products");
 let accesApiTeddies = accesApi("get", "http://localhost:3000/api/teddies", null);
 accesApiTeddies.then(
     function (result) {
+        let tailleResult = result.length;
+        let nombreLignes = 1;
         for (let index = 0; index < result.length; index++) {
-            creerUnProduit(result[index]);
+            if(tailleResult - nbProduitParLigne > 0){
+                nombreLignes += 1;
+                tailleResult -= nbProduitParLigne;
+            }
         }
+        creerBlocProduits(nombreLignes, result);
     }).catch(
         function (erreur) {
             let alerte = document.createElement("h2");
@@ -17,8 +23,36 @@ accesApiTeddies.then(
             listProducts.appendChild(alerte);
         });
 
+//Variable qui exprime le nombre de produits par ligne
+//En fonction de la taille de la fenêtre du navigateur
+//Pour 1275px nbProduitParLigne 2
+let nbProduitParLigne = 3;
+if(window.innerWidth < 1350){
+    nbProduitParLigne = 2;
+    if(window.innerWidth < 900){
+        nbProduitParLigne = 1;
+    }
+}
 
 //Liste des fonctions utilisées 
+
+//Cette fonction permet de rassembler les produits par groupe de 3
+//Pour une meilleure visibilité à l'écran
+function creerBlocProduits(nombre, result){
+    let indexProduit = 0;
+    for(let index=0; index < nombre; index++){
+        let box = document.createElement("div");
+        box.setAttribute("class", "groupeProduits");
+        for(let indexDeux = 0 ; indexDeux < nbProduitParLigne ; indexDeux++){
+            if(indexProduit < result.length){
+                box.appendChild(creerUnProduit(result[indexProduit]));
+                indexProduit += 1;
+            }
+        }
+        listProducts.appendChild(box);
+    }
+    console.log(window.innerWidth);
+}
 
 function creerUnProduit(product) {
     //Création d'une boîte Produit contenant le produit et la boîte du prix
@@ -36,7 +70,7 @@ function creerUnProduit(product) {
     //Ajout du produit à la boîte Produit
     boxProduit.appendChild(produit);
     //Ajout de la boîte Produit à la liste des produits
-    listProducts.appendChild(boxProduit);
+    return boxProduit;
 }
 
 function photoProduit(product) {

@@ -5,12 +5,19 @@
   font-weight: lighter;
   font-style: normal;
 }
-#list-Products {
+.groupeProduits {
+  padding: 0px;
+  margin: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: left;
-  flex-wrap: wrap;
+  align-items: center;
+}
+@media screen and (max-width: 600px) {
+  .groupeProduits {
+    padding: 0px;
+    margin: 0px;
+  }
 }
 
 .boxProduit {
@@ -19,6 +26,24 @@
 }
 .boxProduit:hover {
   transform: scale(1.06);
+}
+@media screen and (max-width: 600px) {
+  .boxProduit:hover {
+    transform: none;
+  }
+}
+@media screen and (max-width: 600px) {
+  .boxProduit {
+    padding-left: -300px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .boxProduit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .boxPrice {
@@ -36,6 +61,11 @@
   padding: 5px;
   margin: 5px;
 }
+@media screen and (max-width: 600px) {
+  .boxPrice {
+    display: none;
+  }
+}
 
 .product {
   border: 1px solid grey;
@@ -45,9 +75,15 @@
   padding: 10px;
   margin: 20px;
   font-weight: normal;
-  max-width: 300px;
+  width: 300px;
   color: black;
   font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 600px) {
+  .product {
+    padding: 10px;
+    margin: 10px;
+  }
 }
 
 .boiteImages {
@@ -298,6 +334,14 @@ header #titreSite {
   padding: 0px;
   margin: 5px;
 }
+@media screen and (max-width: 600px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
 .logoOrinoco {
   display: flex;
@@ -319,6 +363,11 @@ header #titreSite {
 .logoOrinoco p {
   font-family: "Orinoco";
   font-weight: lighter;
+}
+@media screen and (max-width: 600px) {
+  .logoOrinoco {
+    display: none;
+  }
 }
 
 a {
@@ -348,13 +397,9 @@ nav li {
   margin: 0px;
 }
 
-#panier :hover {
-  color: blue;
+#panier :hover, #lienAccueil :hover {
   font-size: 1.1em;
-}
-
-#lienAccueil :hover {
-  font-style: italic;
+  font-weight: bold;
 }
 
 #list-Products {
@@ -363,6 +408,16 @@ nav li {
   margin: 0px;
   width: auto;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+@media screen and (max-width: 600px) {
+  #list-Products {
+    padding: 0px;
+    margin: 0px;
+  }
 }
 
 footer {

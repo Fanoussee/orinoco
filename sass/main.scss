@@ -34,6 +34,9 @@ header {
         font-style: oblique;
         @include marges(5px, 0px);
     }
+    @include mobile{
+        @include flex(column, center, center);
+    }
 }
 
 .logoOrinoco {
@@ -52,6 +55,9 @@ header {
     & p {
         font-family: $policeOrinoco;
         font-weight: lighter;
+    }
+    @include mobile{
+        display: none;
     }
 }
 
@@ -76,13 +82,9 @@ nav {
     }
 }
 
-#panier :hover {
-    color: blue;
+#panier :hover, #lienAccueil :hover {
     font-size: 1.1em;
-}
-
-#lienAccueil :hover {
-    font-style: italic;
+    font-weight: bold;
 }
 
 #list-Products {
@@ -90,6 +92,10 @@ nav {
     @include marges(0px, 50px);
     width: auto;
     height: auto;
+    @include flex(column, center, left);
+    @include mobile{
+        @include marges(0px, 0px);
+    }
 }
 
 footer {
