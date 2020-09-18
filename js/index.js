@@ -51,7 +51,7 @@ function creerBlocProduits(nombre, result){
         }
         listProducts.appendChild(box);
     }
-    console.log(window.innerWidth);
+    //console.log(window.innerWidth);
 }
 
 function creerUnProduit(product) {

@@ -1,7 +1,5 @@
 //Fichier javascript exclusivement réservé à la page Panier du site Oriteddies
 
-//Variable récupérant le localStorage, les produits sélectionnés par l'utilisateur
-let produitsSelectionnes = localStorage;
 //Variable récupérant la boîte html qui contiendra les instances du panier
 let panier = document.getElementById("list-panier");
 //Variable qui contient le prix total des produits sélectionnés
@@ -15,27 +13,8 @@ let donneesValides;
 
 //Création du titre de la page
 creerTitrePage();
-
-//Vérification du panier :
-//S'il est vide affichage "Le panier est vide !" à la place du titre "Panier" précédemment créé
-//Sinon création de la liste des produits sélectionnés
-if (produitsSelectionnes.length == 0) {
-    let panierVide = document.createElement("h3");
-    panierVide.innerHTML = "Le panier est vide !";
-    panier.appendChild(panierVide);
-} else {
-    //La taille des produits sélectionnées est divisée par  car elle contient cinq informations :
-    //L'id, le nom, la photo, la personnalisation et le prix
-    let tailleProdSelect = produitsSelectionnes.length / 5;
-    for (let index = 0; index < tailleProdSelect; index++) {
-        //Récupération de l'identifiant dans le tableau "products" pour pouvoir l'envoyer ensuite à la commande
-        products.push(produitsSelectionnes.getItem("id" + index));
-        creerProduit(index);
-    }
-    totalArticles();
-    creerFormulaire();
-    boiteBoutons();
-}
+//Vérification du panier
+verifierPanier();
 
 //Liste des fonctions utilisées
 
@@ -44,6 +23,29 @@ function creerTitrePage() {
     titrePanier.innerHTML = "Panier ";
     titrePanier.setAttribute("id", "titrePanier");
     panier.appendChild(titrePanier);
+}
+
+//Vérification du panier :
+//S'il est vide affichage "Le panier est vide !" à la place du titre "Panier" précédemment créé
+//Sinon création de la liste des produits sélectionnés
+function verifierPanier() {
+    if (localStorage.length == 0) {
+        let panierVide = document.createElement("h3");
+        panierVide.innerHTML = "Le panier est vide !";
+        panier.appendChild(panierVide);
+    } else {
+        //La taille des produits sélectionnées est divisée par  car elle contient cinq informations :
+        //L'id, le nom, la photo, la personnalisation et le prix
+        let tailleProdSelect = localStorage.length / 5;
+        for (let index = 0; index < tailleProdSelect; index++) {
+            //Récupération de l'identifiant dans le tableau "products" pour pouvoir l'envoyer ensuite à la commande
+            products.push(localStorage.getItem("id" + index));
+            creerProduit(index);
+        }
+        totalArticles();
+        creerFormulaire();
+        boiteBoutons();
+    }
 }
 
 //Création d'une boîte qui contiendra un produit
@@ -60,14 +62,14 @@ function creerProduit(index) {
 function photoProduit(index) {
     let photo = document.createElement("img");
     photo.setAttribute("height", "100px");
-    photo.setAttribute("src", produitsSelectionnes.getItem("photo" + index));
+    photo.setAttribute("src", localStorage.getItem("photo" + index));
     return photo;
 }
 
 function nomProduit(index) {
     let nom = document.createElement("h3");
     nom.setAttribute("class", "nomProduit");
-    nom.innerHTML = produitsSelectionnes.getItem("nom" + index);
+    nom.innerHTML = localStorage.getItem("nom" + index);
     return nom;
 }
 
@@ -75,15 +77,15 @@ function couleurProduit(index) {
     let couleur = document.createElement("p");
     couleur.setAttribute("class", "couleurProduit");
     couleur.innerHTML = "<strong>Personnalisation :</strong> "
-        + produitsSelectionnes.getItem("couleur" + index);
+        + localStorage.getItem("couleur" + index);
     return couleur;
 }
 
 function prixProduit(index) {
     let prix = document.createElement("p");
     prix.setAttribute("class", "prixProduit");
-    let prixEuros = produitsSelectionnes.getItem("prix" + index) / 100;
-    prix.innerHTML = "" + produitsSelectionnes.getItem("prix" + index) / 100 + " €";
+    let prixEuros = localStorage.getItem("prix" + index) / 100;
+    prix.innerHTML = "" + localStorage.getItem("prix" + index) / 100 + " €";
     totalPrix += prixEuros;
     return prix;
 }
@@ -226,6 +228,8 @@ function viderPanier() {
     btnVider.innerHTML = "Vider le panier";
     btnVider.addEventListener("click", function () {
         localStorage.clear();
+        products = [];
+        totalPrix = 0;
     });
     return btnVider;
 }
@@ -240,8 +244,9 @@ function validerCommande() {
     btnCommande.setAttribute("class", "bouton");
     btnCommande.setAttribute("type", "submit");
     btnCommande.innerHTML = "Valider la commande";
+    btnCommande.setAttribute("OnClick", "./ordered.html");
     btnCommande.addEventListener("click", function () {
-        if (products.length == 0) {
+        if (localStorage.length == 0) {
             alert("Votre panier est vide ! ");
             window.location = "./basket.html";
         } else if (donneesValides) {
@@ -251,22 +256,21 @@ function validerCommande() {
             };
             let reqPost = accesApi("post", "http://localhost:3000/api/teddies/order", objet);
             reqPost.then(function (result) {
-                let prenom = result.contact.firstName;
-                let nom = result.contact.lastName;
-                let idCommande = result.orderId;
-                window.location = "./ordered.html" + "?prenom=" + prenom + "&nom=" + nom + "&total=" + totalPrix + "&id=" + idCommande;
+                console.log(result);
+                localStorage.clear();
+                localStorage.setItem("prenom", result.contact.firstName);
+                localStorage.setItem("nom", result.contact.lastName);
+                localStorage.setItem("id", result.orderId);
+                localStorage.setItem("totalPrix", totalPrix);
+                window.location = "./ordered.html";
             }).catch(function (error) {
                 alert(error);
             });
         } else {
-            alert("erreur de saisie");
+            alert("Les données saisies sont invalides!");
         }
     });
     return btnCommande;
-}
-
-function creerBoutonValiderCommande() {
-
 }
 
 function verifDonnees() {

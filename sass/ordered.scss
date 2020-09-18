@@ -4,7 +4,17 @@
     background-color: purple;
 }
 
-#titreMerci, #montantCommande, #numeroCommande{
+#aucuneCommande{
+    @include marges(0px, 50px);
+    background-color: white;
+    font-weight: normal;
+    text-align: center;
+    @include mobile{
+        @include marges(0px, 20px);
+    }
+}
+
+#remerciement, #montantCommande, #numeroCommande{
     @include marges(0px, 20px);
     text-align: center;
     font-weight: normal;

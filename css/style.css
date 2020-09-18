@@ -122,16 +122,34 @@
   padding: 50px;
   margin: 50px;
 }
+@media screen and (max-width: 600px) {
+  #product-solo {
+    padding: 0px;
+    margin: 20px;
+  }
+}
 
 #titreProduit {
   font-size: 3em;
   font-weight: bold;
+}
+@media screen and (max-width: 600px) {
+  #titreProduit {
+    font-size: 2.5em;
+  }
 }
 
 #image,
 #resume,
 #prix {
   font-size: 1.6em;
+}
+
+@media screen and (max-width: 600px) {
+  #image img {
+    width: 300px;
+    height: auto;
+  }
 }
 
 #image,
@@ -150,10 +168,23 @@
   width: 600px;
   text-align: justify;
 }
+@media screen and (max-width: 600px) {
+  #resume {
+    width: auto;
+    padding: 10px;
+    margin: 0px;
+  }
+}
 
 #prix {
   font-weight: bold;
   text-align: right;
+}
+@media screen and (max-width: 600px) {
+  #prix {
+    padding: 10px;
+    margin: 0px;
+  }
 }
 
 #choixCouleurs {
@@ -166,6 +197,12 @@
   padding: 10px;
   margin: 0px;
 }
+@media screen and (max-width: 600px) {
+  #choixCouleurs {
+    padding: 10px;
+    margin: 0px;
+  }
+}
 
 #bouton {
   display: flex;
@@ -177,6 +214,13 @@
 #bouton button {
   padding: 10px;
   margin: 10px;
+}
+@media screen and (max-width: 600px) {
+  #bouton {
+    padding: 0px;
+    margin: 20px;
+    justify-content: center;
+  }
 }
 
 #titrePanier {
@@ -207,6 +251,14 @@
   align-items: center;
   border-bottom: 1px solid black;
 }
+@media screen and (max-width: 600px) {
+  .boiteProduit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
 #couleurProduit {
   font-size: 1.3em;
@@ -221,6 +273,11 @@
 .prixProduit {
   font-weight: bold;
   font-size: 1.5em;
+}
+@media screen and (max-width: 600px) {
+  .prixProduit {
+    font-size: 1.2em;
+  }
 }
 
 #totalPrix {
@@ -237,6 +294,12 @@
 #totalPrix p {
   padding: 10px;
   margin: 0px;
+}
+@media screen and (max-width: 600px) {
+  #totalPrix {
+    font-size: 1.4em;
+    justify-content: center;
+  }
 }
 
 form {
@@ -258,6 +321,14 @@ form div p input {
   min-width: 250px;
   height: 30px;
 }
+@media screen and (max-width: 600px) {
+  form div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
 #legende strong, form strong {
   font-weight: bold;
@@ -278,6 +349,11 @@ form div p input {
   padding: 10px;
   margin: 10px;
 }
+@media screen and (max-width: 600px) {
+  #boxBtn .bouton {
+    min-width: 100px;
+  }
+}
 
 #validationCommande {
   padding: 100px;
@@ -286,7 +362,21 @@ form div p input {
   background-color: purple;
 }
 
-#titreMerci, #montantCommande, #numeroCommande {
+#aucuneCommande {
+  padding: 50px;
+  margin: 0px;
+  background-color: white;
+  font-weight: normal;
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  #aucuneCommande {
+    padding: 20px;
+    margin: 0px;
+  }
+}
+
+#remerciement, #montantCommande, #numeroCommande {
   padding: 20px;
   margin: 0px;
   text-align: center;

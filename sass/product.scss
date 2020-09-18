@@ -3,11 +3,18 @@
     @include flex(column, center, left);
     @include bordureArrondie(2px, solid, $coul-trait, 10px);
     @include marges(50px, 50px);
+
+    @include mobile {
+        @include marges(20px, 0px);
+    }
 }
 
 #titreProduit {
     font-size: 3em;
     font-weight: bold;
+    @include mobile{
+        font-size: 2.5em;
+    }
 }
 
 #image,
@@ -16,29 +23,45 @@
     font-size: 1.6em;
 }
 
+#image img {
+    @include mobile {
+        width: 300px;
+        height: auto;
+    }
+}
+
 #image,
 #titreProduit {
     text-align: center;
 }
 
-#descriptionProduit{
+#descriptionProduit {
     @include flex(column, center, center);
 }
 
 #resume {
     width: $largeur*2;
     text-align: justify;
+    @include mobile{
+        width: auto;
+        @include marges(0px, 10px);
+    }
 }
 
 #prix {
     font-weight: bold;
     text-align: right;
+    @include mobile{
+        @include marges(0px, 10px);
+    }
 }
 
 #choixCouleurs {
     @include flex(row, right, center);
-
     & p {
+        @include marges(0px, 10px);
+    }
+    @include mobile{
         @include marges(0px, 10px);
     }
 }
@@ -46,8 +69,11 @@
 #bouton {
     @include flex(row, right, center);
     margin-top: 30px;
-
     & button {
         @include marges(10px, 10px);
+    }
+    @include mobile{
+        @include marges(20px, 0px);
+        justify-content: center;
     }
 }
