@@ -1,5 +1,6 @@
 //Fichier javascript exclusivement réservé à la page de la validation de la commande du site Oriteddies
-
+let titreSite = document.getElementById("titreSite");
+titreSite.innerHTML = "Ori" + type_produit;
 //Variables récupérant le prénom et le nom de l'utilisateur
 let prenom = localStorage.getItem("prenom");
 let nom = localStorage.getItem("nom");

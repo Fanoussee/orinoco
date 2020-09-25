@@ -187,18 +187,18 @@
   }
 }
 
-#choixCouleurs {
+#persoProduit {
   display: flex;
   flex-direction: row;
   justify-content: right;
   align-items: center;
 }
-#choixCouleurs p {
+#persoProduit p {
   padding: 10px;
   margin: 0px;
 }
 @media screen and (max-width: 600px) {
-  #choixCouleurs {
+  #persoProduit {
     padding: 10px;
     margin: 0px;
   }
@@ -260,12 +260,12 @@
   }
 }
 
-#couleurProduit {
+#persoProduit {
   font-size: 1.3em;
   padding: 0px;
   margin: 20px;
 }
-#couleurProduit strong {
+#persoProduit strong {
   text-decoration: underline;
   font-weight: bold;
 }

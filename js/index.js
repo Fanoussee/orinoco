@@ -1,11 +1,13 @@
-//Ce fichier javascript est exclusivement réservé à la page d'accueil du site Oriteddies
+//Ce fichier javascript est exclusivement réservé à la page d'accueil
+let titreSite = document.getElementById("titreSite");
+titreSite.innerHTML = "Ori" + type_produit;
 
 //Variable qui récupère le contenant de la liste des produits
 let listProducts = document.getElementById("list-Products");
 
-//Variable récupérant la promesse de la requête d'accès à l'API teddies
-let accesApiTeddies = accesApi("get", "http://localhost:3000/api/teddies", null);
-accesApiTeddies.then(
+//Variable récupérant la promesse de la requête d'accès à l'API
+let getApi = accesApi("get", api, null);
+getApi.then(
     function (result) {
         let tailleResult = result.length;
         let nombreLignes = 1;

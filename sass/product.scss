@@ -56,7 +56,7 @@
     }
 }
 
-#choixCouleurs {
+#persoProduit {
     @include flex(row, right, center);
     & p {
         @include marges(0px, 10px);

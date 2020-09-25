@@ -1,5 +1,6 @@
-//Fichier javascript exclusivement réservé à la page Panier du site Oriteddies
-
+//Fichier javascript exclusivement réservé à la page Panier
+let titreSite = document.getElementById("titreSite");
+titreSite.innerHTML = "Ori" + type_produit;
 //Variable récupérant la boîte html qui contiendra les instances du panier
 let panier = document.getElementById("list-panier");
 //Variable qui contient le prix total des produits sélectionnés
@@ -54,7 +55,7 @@ function creerProduit(index) {
     boiteProduit.setAttribute("class", "boiteProduit");
     boiteProduit.appendChild(photoProduit(index));
     boiteProduit.appendChild(nomProduit(index));
-    boiteProduit.appendChild(couleurProduit(index));
+    boiteProduit.appendChild(persoProduit(index));
     boiteProduit.appendChild(prixProduit(index));
     panier.appendChild(boiteProduit);
 }
@@ -73,12 +74,12 @@ function nomProduit(index) {
     return nom;
 }
 
-function couleurProduit(index) {
-    let couleur = document.createElement("p");
-    couleur.setAttribute("class", "couleurProduit");
-    couleur.innerHTML = "<strong>Personnalisation :</strong> "
-        + localStorage.getItem("couleur" + index);
-    return couleur;
+function persoProduit(index) {
+    let personnalisation = document.createElement("p");
+    personnalisation.setAttribute("class", "persoProduit");
+    personnalisation.innerHTML = "<strong>Personnalisation :</strong> "
+        + localStorage.getItem("perso" + index);
+    return personnalisation;
 }
 
 function prixProduit(index) {
@@ -254,9 +255,8 @@ function validerCommande() {
                 "contact": convertMapToObject(contact),
                 "products": products
             };
-            let reqPost = accesApi("post", "http://localhost:3000/api/teddies/order", objet);
+            let reqPost = accesApi("post", api + "/order", objet);
             reqPost.then(function (result) {
-                console.log(result);
                 localStorage.clear();
                 localStorage.setItem("prenom", result.contact.firstName);
                 localStorage.setItem("nom", result.contact.lastName);
