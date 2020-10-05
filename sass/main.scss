@@ -92,7 +92,7 @@ nav {
     @include marges(0px, 50px);
     width: auto;
     height: auto;
-    @include flex(column, center, left);
+    @include flex(column, center, stretch);
     @include mobile{
         @include marges(0px, 0px);
     }

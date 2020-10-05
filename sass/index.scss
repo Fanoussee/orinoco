@@ -18,9 +18,6 @@
         }
     }
     @include mobile{
-        padding-left: -300px;
-    }
-    @include mobile{
         @include flex(column, center, center);
         
     }

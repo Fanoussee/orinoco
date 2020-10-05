@@ -1,6 +1,6 @@
 //Mise en forme spécifique à la page produit
 #product-solo {
-    @include flex(column, center, left);
+    @include flex(column, center, stretch);
     @include bordureArrondie(2px, solid, $coul-trait, 10px);
     @include marges(50px, 50px);
 

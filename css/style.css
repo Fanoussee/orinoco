@@ -2,7 +2,7 @@
   font-family: "Orinoco";
   src: url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.eot");
   src: url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.ttf") format("ttf"), url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.otf") format("otf"), url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.woff2") format("woff2"), url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.woff") format("woff"), url("../fonts/CCAstronautsInTrouble/CCAstronautsInTrouble.svg") format("svg");
-  font-weight: lighter;
+  font-weight: normal;
   font-style: normal;
 }
 .groupeProduits {
@@ -30,11 +30,6 @@
 @media screen and (max-width: 600px) {
   .boxProduit:hover {
     transform: none;
-  }
-}
-@media screen and (max-width: 600px) {
-  .boxProduit {
-    padding-left: -300px;
   }
 }
 @media screen and (max-width: 600px) {
@@ -116,7 +111,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
+  align-items: stretch;
   border: 2px solid #8f5bfe;
   border-radius: 10px;
   padding: 50px;
@@ -282,7 +277,7 @@
 
 #totalPrix {
   display: flex;
-  flex-direction: "row";
+  flex-direction: row;
   justify-content: right;
   align-items: center;
   padding: 10px;
@@ -337,7 +332,7 @@ form div p input {
 
 #boxBtn {
   display: flex;
-  flex-direction: "row";
+  flex-direction: row;
   justify-content: right;
   align-items: center;
   padding: 20px;
@@ -501,7 +496,7 @@ nav li {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
+  align-items: stretch;
 }
 @media screen and (max-width: 600px) {
   #list-Products {
