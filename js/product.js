@@ -78,7 +78,6 @@ function listPersoProduit() {
 function selectPerso() {
     let select = document.getElementById("listPersoProduit");
     persoSelection = select.value;
-    console.log(persoSelection);
     select.addEventListener("click", function () {
         persoSelection = select.value;
     });

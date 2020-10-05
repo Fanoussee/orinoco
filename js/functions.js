@@ -16,6 +16,7 @@ function accesApi(type, url, envoi) {
             request.onreadystatechange = function () {
                 if (type == "GET" && this.readyState == 4 && this.status == 200) {
                     resolve(JSON.parse(this.response));
+                    console.log("L'accès à l'API a fonctionné !");
                 } else if (type == "POST" && this.readyState == 4 && this.status == 201) {
                     resolve(JSON.parse(this.responseText));
                 } else if (this.readyState == 4 && this.status == 0) {
