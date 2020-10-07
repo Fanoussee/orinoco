@@ -19,6 +19,7 @@ function accesApi(type, url, envoi) {
                     console.log("L'accès à l'API a fonctionné !");
                 } else if (type == "POST" && this.readyState == 4 && this.status == 201) {
                     resolve(JSON.parse(this.responseText));
+                    console.log("L'objet JSON a été envoyé !");
                 } else if (this.readyState == 4 && this.status == 0) {
                     reject("La connexion avec l'API a échouée.");
                 } else if (this.readyState == 4 && this.status == 404) {

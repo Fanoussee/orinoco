@@ -268,6 +268,7 @@ function validerCommande() {
             });
         } else {
             alert("Les données saisies sont invalides!");
+            window.location = "./basket.html";
         }
     });
     return btnCommande;
